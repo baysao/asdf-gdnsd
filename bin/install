@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+_install() {
+	apt install -y ragel automake
+	local install_type=$1
+	local version=$2
+	version1=$(echo $version | sed 's/^v//')
+	local install_path=$3
+	tmpd=$(mktemp -d)
+	cd $tmpd
+	git clone --recursive https://github.com/maxmind/libmaxminddb
+	cd libmaxminddb
+        ./bootstrap
+        ./configure --prefix=$install_path
+        make install
+	source_path="https://github.com/gdnsd/gdnsd/archive/${version}.tar.gz"
+	curl -L $source_path -o ${version}.tar.gz
+	tar -xzf ${version}.tar.gz
+	rm ${version}.tar.gz
+	cd gdnsd-${version1}
+	autoreconf -vif
+                autoreconf --install 
+                ./configure --prefix=$install_path
+                make install
+	rm -rf $tmpd
+}
+
+_install $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
