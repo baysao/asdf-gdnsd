@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 _install() {
-	apt install -y ragel automake liburcu-dev libev-dev libsodium-dev libtool libunwind-dev
+	apt install -y ragel automake liburcu-dev libev-dev libsodium-dev libtool libunwind-dev libmaxminddb-dev
 	local install_type=$1
 	local version=$2
 	version1=$(echo $version | sed 's/^v//')
 	local install_path=$3
 	tmpd=$(mktemp -d)
 	cd $tmpd
-	git clone --recursive https://github.com/maxmind/libmaxminddb
-	cd libmaxminddb
-        ./bootstrap
-        ./configure 
-        make install
+	#git clone --recursive https://github.com/maxmind/libmaxminddb
+	#cd libmaxminddb
+        #./bootstrap
+        #./configure 
+        #make install
 	source_path="https://github.com/gdnsd/gdnsd/archive/${version}.tar.gz"
 	curl -L $source_path -o ${version}.tar.gz
 	tar -xzf ${version}.tar.gz
