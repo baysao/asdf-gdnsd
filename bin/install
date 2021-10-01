@@ -11,7 +11,7 @@ _install() {
 	git clone --recursive https://github.com/maxmind/libmaxminddb
 	cd libmaxminddb
         ./bootstrap
-        ./configure --prefix=$install_path
+        ./configure 
         make install
 	source_path="https://github.com/gdnsd/gdnsd/archive/${version}.tar.gz"
 	curl -L $source_path -o ${version}.tar.gz
