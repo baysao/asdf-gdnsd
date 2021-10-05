@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 _install() {
-	apt install -y ragel automake liburcu-dev libev-dev libsodium-dev libtool libunwind-dev libmaxminddb-dev
+	apt install -y ragel automake liburcu-dev libev-dev libsodium-dev libtool libunwind-dev libmaxminddb-dev build-essential autoconf
 	local install_type=$1
 	local version=$2
 	version1=$(echo $version | sed 's/^v//')
